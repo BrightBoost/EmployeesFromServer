@@ -30,6 +30,25 @@ function onSelectWorker() {
   let workerTableBody = document.getElementById("workerTableBody");
   const workersNames = document.getElementById("workers");
   let selection = workersNames.value;
-  let selectedEmployee = employees.find(e => e.id == selection);
+  let selectedEmployee = employees.find((e) => e.id == selection);
   workerTableBody.innerHTML = "";
+
+  if (selection == "") {
+    return;
+  } else {
+    console.log(Object.keys(selectedEmployee));
+    console.log(selectedEmployee);
+    selectedEmployee["projectsAssignedTo"] =
+      selectedEmployee["projectsAssignedTo"].length;
+    for (let i = 0; i < Object.keys(selectedEmployee).length; i++) {
+      let row = workerTableBody.insertRow(-1);
+      let thElement = document.createElement("th");
+      thElement.innerHTML = Object.keys(selectedEmployee)[i];
+      row.appendChild(thElement);
+
+      let cell = row.insertCell(1);
+      cell.innerHTML = selectedEmployee[Object.keys(selectedEmployee)[i]];
+      console.log(Object.keys(selectedEmployee)[i]);
+    }
+  }
 }
