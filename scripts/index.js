@@ -33,17 +33,28 @@ function onSelectWorker() {
   let selectedEmployee = employees.find((e) => e.id == selection);
   workerTableBody.innerHTML = "";
 
+  let translateLabels = {
+    id: "ID",
+    jobTitle: "Job title",
+    name: "Name",
+    yearsAtCompany: "Years at company",
+    wfhAdddress: "Address",
+    email: "Email",
+    projectsAssignedTo: "Assigned projects",
+    skillsSet: "Skills set",
+  };
+
   if (selection == "") {
     return;
   } else {
-    console.log(Object.keys(selectedEmployee));
-    console.log(selectedEmployee);
-    selectedEmployee["projectsAssignedTo"] =
-      selectedEmployee["projectsAssignedTo"].length;
+    if (isNaN(selectedEmployee["projectsAssignedTo"])) {
+      selectedEmployee["projectsAssignedTo"] = selectedEmployee["projectsAssignedTo"].length;
+    }
+
     for (let i = 0; i < Object.keys(selectedEmployee).length; i++) {
       let row = workerTableBody.insertRow(-1);
       let thElement = document.createElement("th");
-      thElement.innerHTML = Object.keys(selectedEmployee)[i];
+      thElement.innerHTML = translateLabels[Object.keys(selectedEmployee)[i]];
       row.appendChild(thElement);
 
       let cell = row.insertCell(1);
